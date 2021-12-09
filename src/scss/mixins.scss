@@ -1,0 +1,6 @@
+@import './colors';
+
+@mixin defaultBorder {
+  border: 1px solid $primary-border-color;
+  border-radius: 2px;
+}

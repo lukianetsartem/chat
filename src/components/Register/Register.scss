@@ -1,0 +1,27 @@
+@import "./src/scss/colors";
+
+.register {
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    width: 300px;
+    height: 40px;
+    padding: 0 15px;
+    margin-bottom: 20px;
+    border: 1px solid $primary-border-color;
+    outline: none;
+  }
+
+  input::placeholder {
+    color: $primary-border-color;
+  }
+
+  .register--body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

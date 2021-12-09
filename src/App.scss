@@ -1,0 +1,29 @@
+@import "scss/colors";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.app {
+  width: 500px;
+  height: auto;
+  border: 1px solid $primary-border-color;
+}
+
+header {
+  width: 100%;
+  height: 50px;
+  background: $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
