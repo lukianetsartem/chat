@@ -4,18 +4,19 @@ import { Chat } from './components/Chat/Chat';
 import { Register } from './components/Register/Register';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
-import { checkAuth } from './managers/CheckAuthManager';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 function App() {
-  const isAuth = false;
+  const isAuth = useSelector(state => state.user.username);
+
   useEffect(() => {
-      checkAuth(isAuth);
-  });
+    if (isAuth) window.location.pathname = '/chat';
+  }, [isAuth]);
 
   return (
     <section className="app">
@@ -25,7 +26,7 @@ function App() {
           <Route path="/register" children={<Register />} />
           <Route path="/chat" children={<Chat />} />
           <Route path="">
-            <Redirect to="/chat" />
+            <Redirect to="/register" />
           </Route>
         </Switch>
       </Router>
