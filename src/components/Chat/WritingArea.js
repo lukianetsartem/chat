@@ -6,7 +6,9 @@ export const WritingArea = props => {
 
   const sendMessage = () => {
       setValue("")
-      props.writeMessage(value)
+      if(value.length > 0) {
+          props.writeMessage(value)
+      } else alert('Field is empty, write something before send')
   }
 
   return (

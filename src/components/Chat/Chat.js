@@ -6,7 +6,6 @@ import {writeMessageAC} from "../../actions/actions";
 
 export const Chat = () => {
   const user = useSelector(state => state?.user);
-  const messages = useSelector(state => state?.chat);
   const dispatch = useDispatch();
 
   const writeMessage = text => {
@@ -15,7 +14,7 @@ export const Chat = () => {
 
   return (
     <div className="chat">
-      <Messages messages={messages} userId={user.userId} />
+      <Messages userId={user.userId} />
       <WritingArea writeMessage={writeMessage} />
     </div>
   );

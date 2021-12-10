@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Message } from './Message';
+import { messagesManager } from '../../managers/messagesManager';
+import { useSelector } from 'react-redux';
 
 export const Messages = props => {
-  const { messages, userId } = props;
+  const { userId } = props;
+  const messages = useSelector(state => state?.chat);
+  const ref = useRef();
+
+  useEffect(() => {
+    messagesManager();
+    ref.current?.scrollTo(0, ref.current?.scrollHeight);
+  }, [messages]);
 
   return (
-    <section className="chat--messages">
+    <section ref={ref} className="chat--messages">
       {messages.map(m => (
         <Message
           key={m.id}

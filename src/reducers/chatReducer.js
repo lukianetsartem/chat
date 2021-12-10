@@ -19,6 +19,8 @@ export default function chatReducer(
         JSON.stringify(updatedState),
       );
       return updatedState;
+    case 'GET_MESSAGES':
+      return state;
     default:
       return state;
   }

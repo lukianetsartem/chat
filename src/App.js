@@ -8,15 +8,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { useEffect } from 'react';
-import { messagesManager } from './managers/messagesManager';
-
 
 function App() {
-  useEffect(() => {
-    messagesManager();
-  }, []);
-
   return (
     <section className="app">
       <Header />
