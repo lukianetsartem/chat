@@ -1,13 +1,22 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button } from '../Button/Button';
 
 export const WritingArea = props => {
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState("");
 
-    return (
+  const sendMessage = () => {
+      setValue("")
+      props.writeMessage(value)
+  }
+
+  return (
     <section className="chat--writing-area">
-      <input onChange={e => setValue(e.target.value)}/>
-      <Button onClick={() => props.writeMessage(value)} label="Start" color="primary" />
+      <input value={value} onChange={e => setValue(e.target.value)} />
+      <Button
+        onClick={sendMessage}
+        label="Send"
+        color="primary"
+      />
     </section>
   );
 };

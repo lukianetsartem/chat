@@ -1,7 +1,22 @@
-export default function authReducer(state = "Artem", action) {
+import { v4 as uuidv4 } from 'uuid';
+
+export default function authReducer(
+  state = JSON.parse(sessionStorage.getItem(process.env.SESSION_STORAGE_NAME)),
+  action,
+) {
   switch (action.type) {
     case 'REGISTER':
-      return action.username;
+      const newUser = {
+        username: action.username,
+        userId: uuidv4(),
+      };
+
+      sessionStorage.setItem(
+        process.env.SESSION_STORAGE_NAME,
+        JSON.stringify(newUser),
+      );
+
+      return newUser;
     default:
       return state;
   }

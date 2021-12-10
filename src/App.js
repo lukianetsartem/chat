@@ -9,7 +9,8 @@ import {
   Switch,
 } from 'react-router-dom';
 import { useEffect } from 'react';
-import {messagesManager} from "./managers/messagesManager";
+import { messagesManager } from './managers/messagesManager';
+
 
 function App() {
   useEffect(() => {
