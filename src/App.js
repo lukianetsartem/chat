@@ -8,15 +8,13 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import {messagesManager} from "./managers/messagesManager";
 
 function App() {
-  const isAuth = useSelector(state => state.user.username);
-
   useEffect(() => {
-    if (isAuth) window.location.pathname = '/chat';
-  }, [isAuth]);
+    messagesManager();
+  }, []);
 
   return (
     <section className="app">

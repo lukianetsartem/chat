@@ -4,7 +4,7 @@ export const Messages = props => {
   return (
     <section className="chat--messages">
       {messages.map(m => (
-        <div className="chat--message" key={m}>{m}</div>
+        <div className="chat--message" key={m.id}>{m.text}</div>
       ))}
     </section>
   );

@@ -1,7 +1,7 @@
-export default function authReducer(state = { username: null }, action) {
+export default function authReducer(state = "Artem", action) {
   switch (action.type) {
     case 'REGISTER':
-      return { username: action.username };
+      return action.username;
     default:
       return state;
   }
