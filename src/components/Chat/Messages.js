@@ -1,17 +1,41 @@
 import React, { useEffect, useRef } from 'react';
 import { Message } from './Message';
 import { useDispatch, useSelector } from 'react-redux';
-import { createStorageAC } from '../../actions/actions';
+import {
+  createStorageAC,
+  getChatPartAC,
+  updateChatAC,
+} from '../../actions/actions';
 
 export const Messages = props => {
   const { userId } = props;
   const messages = useSelector(state => state?.chat);
   const ref = useRef();
   const dispatch = useDispatch();
+  const step = 10;
+
+  const scrollHandler = e => {
+    if (e.target.scrollTop < 100) {
+      const amount = messages.length + step;
+      dispatch(getChatPartAC(amount));
+    }
+  };
+
+  useEffect(() => {
+    ref.current?.addEventListener('scroll', scrollHandler);
+    return function () {
+      ref.current?.removeEventListener('scroll', scrollHandler);
+    };
+  }, [scrollHandler]);
 
   useEffect(() => {
     ref.current?.scrollTo(0, ref.current?.scrollHeight);
-  }, [messages]);
+  }, []);
+
+  // Checking if localstorage is changing from other documents
+  window.onstorage = () => {
+    dispatch(updateChatAC(messages.length + 1));
+  };
 
   const getMessagesContent = () => {
     if (messages) {
