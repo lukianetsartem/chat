@@ -1,4 +1,4 @@
-import {CREATE_STORAGE, WRITE_MESSAGE} from "../actions/actions";
+import {CREATE_STORAGE, UPDATE_CHAT, WRITE_MESSAGE} from "../actions/actions";
 
 export default function chatReducer(
   state = JSON.parse(localStorage.getItem(process.env.MESSAGES_STORAGE_NAME)),
@@ -29,7 +29,9 @@ export default function chatReducer(
         JSON.stringify(updatedState),
       );
       return updatedState;
-    default:
+    case UPDATE_CHAT:
+      return JSON.parse(localStorage.getItem(process.env.MESSAGES_STORAGE_NAME));
+      default:
       return state;
   }
 }

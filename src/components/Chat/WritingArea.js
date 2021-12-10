@@ -13,7 +13,7 @@ export const WritingArea = props => {
 
   return (
     <section className="chat--writing-area">
-      <input value={value} onChange={e => setValue(e.target.value)} />
+      <input value={value} onChange={e => setValue(e.target.value)} autoFocus />
       <Button onClick={sendMessage} label="Send" color="primary" />
     </section>
   );

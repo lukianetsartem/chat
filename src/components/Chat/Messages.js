@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Message } from './Message';
 import { useDispatch, useSelector } from 'react-redux';
-import {createStorageAC} from "../../actions/actions";
+import { createStorageAC } from '../../actions/actions';
 
 export const Messages = props => {
   const { userId } = props;
@@ -34,7 +34,7 @@ export const Messages = props => {
         </>
       );
     }
-    dispatch(createStorageAC())
+    dispatch(createStorageAC());
   };
 
   return (
