@@ -10,8 +10,8 @@ import {
 export const Messages = props => {
   const { userId } = props;
   const messages = useSelector(state => state?.chat);
-  const ref = useRef();
   const dispatch = useDispatch();
+  const ref = useRef();
   const step = 10;
 
   const scrollHandler = e => {

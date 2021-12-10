@@ -12,6 +12,8 @@ export const Chat = () => {
     dispatch(writeMessageAC(text, user));
   };
 
+  if (!user) window.location.pathname = '/register';
+
   return (
     <div className="chat">
       <Messages userId={user.userId} />

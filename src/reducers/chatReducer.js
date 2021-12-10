@@ -26,7 +26,6 @@ export default function chatReducer(state = getData(), action) {
     case UPDATE_CHAT:
       return getData().slice(-action.amount);
     case GET_CHAT_PART:
-      console.log(getData().slice(-action.amount))
       return getData().slice(-action.amount)
     default:
       return getData().slice(-10);
