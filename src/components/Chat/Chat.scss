@@ -46,6 +46,21 @@
     height: auto;
   }
 
+  $message-margin: 10px;
+
+  .chat--message__owned {
+    justify-content: flex-end;
+   .chat--message__avatar {
+     order: 2;
+     background: $primary-color;
+   }
+    .chat--message__text {
+      order: 1;
+      margin-left: 0;
+      margin-right: $message-margin;
+    }
+  }
+
   .chat--message__avatar {
     $avatar-size: 50px;
     width: $avatar-size;
@@ -60,7 +75,7 @@
   }
 
   .chat--message__text {
-    margin-left: 10px;
+    margin-left: $message-margin;
     background: #efefef;
     border-radius: 5px;
     padding: 4px 8px;

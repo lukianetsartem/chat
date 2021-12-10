@@ -6,7 +6,7 @@ import { registerAC } from '../../actions/actions';
 
 export const Register = () => {
   const [username, setUsername] = useState(null);
-  const user = useSelector(state => state.user);
+  const user = useSelector(state => state?.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
