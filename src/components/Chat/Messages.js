@@ -13,7 +13,11 @@ export const Messages = props => {
   const scrollHandler = e => {
     if (e.target.scrollTop < 100) {
       const amount = messages.length + step;
+      // Remember scroll position
+      const distance = e.target.scrollHeight - e.target.scrollTop - e.target.offsetHeight;
       dispatch(updateChatAC(-amount));
+      // Move scroll to previous position
+      ref.current?.scrollTo(0, e.target.scrollHeight - distance - e.target.offsetHeight)
     }
   };
 

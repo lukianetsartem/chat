@@ -10,6 +10,6 @@ export default function chatReducer(state = [], action) {
     case UPDATE_CHAT:
       return getDataPart(action.amount);
     default:
-      return getDataPart(-10);
+      return getDataPart(-20);
   }
 }
