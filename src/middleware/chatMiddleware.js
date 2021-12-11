@@ -1,5 +1,5 @@
-import { CREATE_STORAGE, REGISTER, WRITE_MESSAGE } from '../actions/actions';
-import { getData, register, saveData } from '../api/api';
+import { CREATE_STORAGE, WRITE_MESSAGE } from '../actions/actions';
+import { getData, saveData } from '../api/api';
 
 function chatMiddleware() {
   return next => action => {
@@ -9,9 +9,6 @@ function chatMiddleware() {
         break;
       case CREATE_STORAGE:
         saveData([]);
-        break;
-      case REGISTER:
-        register(action.user);
         break;
       default:
         break;

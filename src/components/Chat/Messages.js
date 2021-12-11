@@ -1,33 +1,45 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Message } from './Message';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStorageAC, updateChatAC } from '../../actions/actions';
 import { getDataPart } from '../../api/api';
 
-export const Messages = props => {
-  const { userId } = props;
+export const Messages = ({ userId }) => {
   const messages = useSelector(state => state?.chat);
   const dispatch = useDispatch();
   const ref = useRef();
   const step = 10;
 
-  const getNewMessages = useCallback(amount => {
-    const newMessages = getDataPart(-amount);
-    dispatch(updateChatAC(newMessages));
-  }, [dispatch]);
+  const getNewMessages = useCallback(
+    amount => {
+      const newMessages = getDataPart(-amount);
+      dispatch(updateChatAC(newMessages));
+    },
+    [dispatch],
+  );
 
-  const scrollHandler = useCallback(e => {
-    const element = e.target;
-    if (element.scrollTop < 100) {
-      // Remember scroll position
-      const distance = element.scrollHeight - element.scrollTop - element.offsetHeight;
+  const [prevLength, setPrevLength] = useState(0);
+  const scrollHandler = useCallback(
+    e => {
+      const element = e.target;
+      if (element.scrollTop < 100) {
+        // Remember scroll position
+        const distance = element.scrollHeight - element.scrollTop - element.offsetHeight;
 
-      getNewMessages(messages.length + step);
+        getNewMessages(messages.length + step);
 
-      // Move scroll to previous position
-      ref.current?.scrollTo(0, element.scrollHeight - distance - element.offsetHeight);
-    }
-  }, [getNewMessages, messages.length]);
+        // Remove listener if all messages loaded
+        if (prevLength === messages.length) {
+          ref.current?.removeEventListener('scroll', scrollHandler);
+        }
+
+        setPrevLength(messages.length);
+        // Move scroll to previous position
+        ref.current?.scrollTo(0, element.scrollHeight - distance - element.offsetHeight);
+      }
+    },
+    [getNewMessages, messages.length, prevLength],
+  );
 
   useEffect(() => {
     const scrollRef = ref.current;

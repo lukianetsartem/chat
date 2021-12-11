@@ -1,5 +1,5 @@
 export const getData = () => {
-  return JSON.parse(localStorage.getItem(process.env.MESSAGES_STORAGE_NAME));
+  return JSON.parse(localStorage.getItem(process.env.REACT_APP_MESSAGES_STORAGE_NAME));
 };
 
 export const getDataPart = amount => {
@@ -7,12 +7,16 @@ export const getDataPart = amount => {
 };
 
 export const saveData = data => {
-  localStorage.setItem(process.env.MESSAGES_STORAGE_NAME, JSON.stringify(data));
+  localStorage.setItem(process.env.REACT_APP_MESSAGES_STORAGE_NAME, JSON.stringify(data));
 };
 
 export const register = user => {
   sessionStorage.setItem(
-    process.env.SESSION_STORAGE_NAME,
+    process.env.REACT_APP_SESSION_STORAGE_NAME,
     JSON.stringify(user),
   );
 };
+
+export const getUserData = () => {
+  return JSON.parse(sessionStorage.getItem(process.env.REACT_APP_SESSION_STORAGE_NAME))
+}
