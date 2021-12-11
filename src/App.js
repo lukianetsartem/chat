@@ -7,19 +7,17 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {useEffect} from "react";
-import {loadUserDataAC, updateChatAC} from "./actions/actions";
-import {getDataPart, getUserData} from "./api/api";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { initializeAppAC } from './actions/actions';
 
 function App() {
   const user = useSelector(state => state?.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadUserDataAC(getUserData()))
-    dispatch(updateChatAC(getDataPart(-20)))
-  }, [dispatch])
+    dispatch(initializeAppAC());
+  }, [dispatch]);
 
   return (
     <section className="app">

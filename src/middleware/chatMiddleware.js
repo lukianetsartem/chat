@@ -1,5 +1,6 @@
-import { CREATE_STORAGE, WRITE_MESSAGE } from '../actions/actions';
-import { getData, saveData } from '../api/api';
+import {CREATE_STORAGE, LOAD_MESSAGES_PART, updateChatAC, WRITE_MESSAGE} from '../actions/actions';
+import {getData, getDataPart, saveData} from '../api/api';
+import {store} from "../redux/store";
 
 function chatMiddleware() {
   return next => action => {
@@ -9,6 +10,10 @@ function chatMiddleware() {
         break;
       case CREATE_STORAGE:
         saveData([]);
+        break;
+      case LOAD_MESSAGES_PART:
+        const newMessages = getDataPart(-action.amount);
+        store.dispatch(updateChatAC(newMessages));
         break;
       default:
         break;
