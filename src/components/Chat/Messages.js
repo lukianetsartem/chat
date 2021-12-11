@@ -17,7 +17,7 @@ export const Messages = props => {
   const scrollHandler = e => {
     if (e.target.scrollTop < 100) {
       const amount = messages.length + step;
-      dispatch(getChatPartAC(amount));
+      dispatch(updateChatAC(amount));
     }
   };
 
