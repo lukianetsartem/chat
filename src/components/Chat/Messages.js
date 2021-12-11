@@ -3,7 +3,6 @@ import { Message } from './Message';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   createStorageAC,
-  getChatPartAC,
   updateChatAC,
 } from '../../actions/actions';
 
