@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Message } from './Message';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStorageAC, updateChatAC } from '../../actions/actions';
+import { getDataPart } from '../../api/api';
 
 export const Messages = props => {
   const { userId } = props;
@@ -10,21 +11,30 @@ export const Messages = props => {
   const ref = useRef();
   const step = 10;
 
-  const scrollHandler = e => {
-    if (e.target.scrollTop < 100) {
-      const amount = messages.length + step;
+  const getNewMessages = useCallback(amount => {
+    const newMessages = getDataPart(-amount);
+    dispatch(updateChatAC(newMessages));
+  }, [dispatch]);
+
+  const scrollHandler = useCallback(e => {
+    const element = e.target;
+    if (element.scrollTop < 100) {
       // Remember scroll position
-      const distance = e.target.scrollHeight - e.target.scrollTop - e.target.offsetHeight;
-      dispatch(updateChatAC(-amount));
+      const distance = element.scrollHeight - element.scrollTop - element.offsetHeight;
+
+      getNewMessages(messages.length + step);
+
       // Move scroll to previous position
-      ref.current?.scrollTo(0, e.target.scrollHeight - distance - e.target.offsetHeight)
+      ref.current?.scrollTo(0, element.scrollHeight - distance - element.offsetHeight);
     }
-  };
+  }, [getNewMessages, messages.length]);
 
   useEffect(() => {
-    ref.current?.addEventListener('scroll', scrollHandler);
+    const scrollRef = ref.current;
+
+    scrollRef?.addEventListener('scroll', scrollHandler);
     return function () {
-      ref.current?.removeEventListener('scroll', scrollHandler);
+      scrollRef?.removeEventListener('scroll', scrollHandler);
     };
   }, [scrollHandler]);
 
@@ -34,7 +44,7 @@ export const Messages = props => {
 
   // Checking if localstorage is changing from other documents
   window.onstorage = () => {
-    dispatch(updateChatAC(messages.length + 1));
+    getNewMessages(messages.length + 1);
   };
 
   const getMessagesContent = () => {

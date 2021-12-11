@@ -19,8 +19,8 @@ export const createStorageAC = () => {
   return { type: CREATE_STORAGE };
 };
 
-export const updateChatAC = amount => {
-  return { type: UPDATE_CHAT, amount };
+export const updateChatAC = messages => {
+  return { type: UPDATE_CHAT, messages };
 };
 
 export const writeMessageAC = (text, user) => {
