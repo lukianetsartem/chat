@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export const REGISTER = 'REGISTER';
+export const LOAD_USER_DATA = 'LOAD_USER_DATA';
+
 export const CREATE_STORAGE = 'CREATE_STORAGE';
 export const WRITE_MESSAGE = 'WRITE_MESSAGE';
 export const UPDATE_CHAT = 'UPDATE_CHAT';
@@ -12,6 +14,13 @@ export const registerAC = username => {
       username: username,
       userId: uuidv4(),
     },
+  };
+};
+
+export const loadUserDataAC = user => {
+  return {
+    type: LOAD_USER_DATA,
+    user,
   };
 };
 

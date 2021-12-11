@@ -1,7 +1,6 @@
 import { CREATE_STORAGE, UPDATE_CHAT, WRITE_MESSAGE } from '../actions/actions';
-import { getDataPart } from '../api/api';
 
-export default function chatReducer(state = getDataPart(-20), action) {
+export default function chatReducer(state = [], action) {
   switch (action.type) {
     case CREATE_STORAGE:
       return [];

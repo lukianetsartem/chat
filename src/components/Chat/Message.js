@@ -5,9 +5,7 @@ export const Message = props => {
 
   return (
     <div
-      className={`chat--message ${
-        ownerId === userId && 'chat--message__owned'
-      }`}
+      className={ownerId === userId ? 'chat--message chat--message__owned' : 'chat--message'}
       key={id}
     >
       <div className="chat--message__avatar">{letter}</div>
