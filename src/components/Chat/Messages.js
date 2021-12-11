@@ -1,10 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Message } from './Message';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  createStorageAC,
-  updateChatAC,
-} from '../../actions/actions';
+import { createStorageAC, updateChatAC } from '../../actions/actions';
 
 export const Messages = props => {
   const { userId } = props;
@@ -16,7 +13,7 @@ export const Messages = props => {
   const scrollHandler = e => {
     if (e.target.scrollTop < 100) {
       const amount = messages.length + step;
-      dispatch(updateChatAC(amount));
+      dispatch(updateChatAC(-amount));
     }
   };
 

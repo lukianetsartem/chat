@@ -1,34 +1,15 @@
-import {
-  CREATE_STORAGE,
-  UPDATE_CHAT,
-  WRITE_MESSAGE,
-} from '../actions/actions';
+import { CREATE_STORAGE, UPDATE_CHAT, WRITE_MESSAGE } from '../actions/actions';
+import { getDataPart } from '../api/api';
 
-const getData = () => {
-  return JSON.parse(localStorage.getItem(process.env.MESSAGES_STORAGE_NAME));
-};
-const saveData = data => {
-  localStorage.setItem(process.env.MESSAGES_STORAGE_NAME, JSON.stringify(data));
-};
-
-export default function chatReducer(state = getData(), action) {
+export default function chatReducer(state = [], action) {
   switch (action.type) {
-    case CREATE_STORAGE: {
-      saveData([]);
+    case CREATE_STORAGE:
       return [];
-    }
     case WRITE_MESSAGE:
-      const newMessage = {
-        text: action.text,
-        letter: action.user.username[0],
-        ownerId: action.user.userId,
-      };
-
-      saveData([...getData(), newMessage]);
-      return [...state, newMessage];
+      return [...state, action.newMessage];
     case UPDATE_CHAT:
-      return getData().slice(-action.amount);
+      return getDataPart(action.amount);
     default:
-      return getData().slice(-10);
+      return getDataPart(-10);
   }
 }
